@@ -13,7 +13,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
   const db = client.db(databaseName)
 
-  db.collection('users').findOne({ name: 'Barbara' }, (error, user) => {
+  db.collection('users').findOne({ _id: new ObjectID("6098e05bde98de25306597a6") }, (error, user) => {
     // If an error occurs
     if (error) {
       return console.log('Unable to fetch')
