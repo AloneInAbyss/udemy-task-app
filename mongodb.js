@@ -50,10 +50,10 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
     }
   ], (error, result) => {
     if (error) {
-      return console.log('Unable to insert tasks');
+      return console.log('Unable to insert tasks')
     }
 
-    console.log(result.ops);
+    console.log(result.ops)
   })
 
 })
