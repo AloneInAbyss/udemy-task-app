@@ -13,6 +13,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
   const db = client.db(databaseName)
 
+  // Search by ID
   db.collection('users').findOne({ _id: new ObjectID("6098e05bde98de25306597a6") }, (error, user) => {
     // If an error occurs
     if (error) {
@@ -20,6 +21,15 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
     }
 
     console.log(user);
+  })
+
+  // Search by Name, Age
+  db.collection('users').find({ name:"Thiago" }).toArray((error, users) => {
+    console.log(users);
+  })
+  // Count the number of records
+  db.collection('users').find({ name:"Thiago" }).count((error, count) => {
+    console.log(count);
   })
 
 })
