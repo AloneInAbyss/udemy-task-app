@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 mongoose.connect(
   'mongodb://localhost:27017/task-manager', 
@@ -9,6 +10,15 @@ const User = mongoose.model('User', {
   name: {
     type: String,
     required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error('Email is invalid')
+      }
+    }
   },
   age: {
     type: Number,
@@ -22,31 +32,31 @@ const User = mongoose.model('User', {
 
 const me = new User({
   name: 'Eula',
-  age: 25
+  email: "genshin@impact.gg"
 })
 
-// me.save().then(() => {
-//   console.log(me);
-// }).catch((error) => {
-//   console.log('Error!', error);
+me.save().then(() => {
+  console.log(me);
+}).catch((error) => {
+  console.log('Error!', error);
+})
+
+// const Task = mongoose.model('Task', {
+//   description: {
+//     type: String
+//   },
+//   completed: {
+//     type: Boolean
+//   }
 // })
 
-const Task = mongoose.model('Task', {
-  description: {
-    type: String
-  },
-  completed: {
-    type: Boolean
-  }
-})
+// const task = new Task({
+//   description: 'Learn the Mongoose library',
+//   completed: false
+// })
 
-const task = new Task({
-  description: 'Learn the Mongoose library',
-  completed: false
-})
-
-task.save().then(() => {
-  console.log(task);
-}).catch((error) => {
-  console.log(error);
-})
+// task.save().then(() => {
+//   console.log(task);
+// }).catch((error) => {
+//   console.log(error);
+// })
