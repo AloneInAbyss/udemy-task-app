@@ -1,8 +1,8 @@
 const express = require('express')
 const multer = require('multer')
+const sharp = require('sharp')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
-const sharp = require('sharp')
 const router = new express.Router()
 
 router.post('/users', async (req, res) => {
@@ -87,7 +87,7 @@ const upload = multer({
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('Please upload a image'))
+      return cb(new Error('Please upload an image'))
     }
     cb(undefined, true)
   }
