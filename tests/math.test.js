@@ -1,4 +1,7 @@
+const mongoose = require('mongoose')
+
 const { calculateTip, celsiusToFahrenheit, fahrenheitToCelsius, add } = require('../src/math')
+
 
 test('Should calculate total with tip', () => {
   const total = calculateTip(10, .3)
@@ -39,3 +42,5 @@ test('Should add two numbers async/await', async () => {
   const sum = await add(10, 22);
   expect(sum).toBe(32);
 })
+
+afterAll(async () => { await mongoose.connection.close() })
